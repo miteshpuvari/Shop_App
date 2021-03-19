@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Button, TouchableOpacity, TouchableNativeFeedback, Platform} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform} from 'react-native';
 
-import Colors from '../../constants/Colors';
+import Cart from '../../components/UI/Cart';
 
 const ProductItem = props => {
     let TouchableCmp = TouchableOpacity;
@@ -12,41 +12,29 @@ const ProductItem = props => {
 
     return (
         
-        <View style={styles.product}>
+        <Cart style={styles.product}>
             <View>
-                <TouchableCmp onPress={props.onViewDetail} >
+                <TouchableCmp onPress={props.onSelect} >
             <View>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{uri: props.image}} />
             </View>
             <View style={styles.details} >
                 <Text style={styles.title} >{props.title}</Text>
-                <Text style={styles.price} >${props.price.toFixed(2)}</Text>
+                <Text style={styles.price} >${props.price}</Text>
             </View>
             <View style={styles.actions} >
-                <Button color={Colors.primary} title="View Detail"  onPress={props.onViewDetail} />
-                <Button
-                color={Colors.primary}
-                title="To Cart"
-                onPress={props.onAddToCart}
-              />
+                {props.children}
             </View>
             </View>
             </TouchableCmp>
             </View>
-        </View>
+        </Cart>
     );
 };
 
 const styles = StyleSheet.create({
     product: {
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: {width: 0, height: 2},
-        shadowRadius: 8,
-        elevation: 5,
-        borderRadius: 10,
-        backgroundColor: 'white',
         height: 300,
         margin: 20
     },
